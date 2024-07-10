@@ -30,28 +30,14 @@ function! test#java#gradletest#build_position(type, position) abort
   endif
 endfunction
 
+
 function! test#java#gradletest#build_args(args) abort
   return a:args
 endfunction
 
 function! s:get_maven_module(filepath)
   let l:project_dir = fnamemodify(s:GetJavaProjectDirectory(a:filepath), ':p:h')
-  let l:project_root = l:project_dir
-
-  while !filereadable(l:project_root.'/settings.gradle') && !filereadable(l:project_root.'/settings.gradle.kts')
-    let l:project_root = fnamemodify(l:project_root, ':h')
-    if l:project_root == '/'
-      let l:project_root = l:project_dir
-      break
-    endif
-  endwhile
-
-  let l:module_name = l:project_dir[len(l:project_root)+1:]
-  if !empty(l:module_name)
-    return ' -p '.l:module_name
-  else
-    return ''
-  endif
+  return ' -p '.l:project_dir
 endfunction
 
 function! s:GetJavaProjectDirectory(filepath)
