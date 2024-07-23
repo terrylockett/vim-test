@@ -96,11 +96,7 @@ function! s:GetBuildFile(pwd)
 endfunction
 
 function! test#java#gradletest#executable() abort
-  if findfile('gradlew') ==# 'gradlew'
-    return './gradlew test'
-  else
-    return 'gradle test'
-  endif
+  return './gradlew test'
 endfunction
 
 function! s:nearest_test(position) abort
